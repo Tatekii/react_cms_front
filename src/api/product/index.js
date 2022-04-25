@@ -1,10 +1,10 @@
 import axios from "../request";
-const BASE_URL = process.env.REACT_APP_BASE_URL;
+// const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // 请求商品列表
 export const reqProductList = (pageNum, pageSize) => {
   return axios({
-    url: `${BASE_URL}/manage/product/list`,
+    url: `api/manage/product/list`,
     method: "get",
     params: {
       pageNum,
@@ -16,7 +16,7 @@ export const reqProductList = (pageNum, pageSize) => {
 // 添加商品
 export const reqAddOrUpdateProduct = (productObj) => {
   return axios({
-    url: `${BASE_URL}/manage/product/${productObj._id ? "update" : "add"}`,
+    url: `api/manage/product/${productObj._id ? "update" : "add"}`,
     method: "post",
     data: {
       productObj,
@@ -32,7 +32,7 @@ export const reqSearchProduct = ({
   searchKeyword,
 }) => {
   return axios({
-    url: `${BASE_URL}/manage/product/search`,
+    url: `api/manage/product/search`,
     method: "get",
     params: {
       pageNum,
@@ -45,7 +45,7 @@ export const reqSearchProduct = ({
 // 用id请求商品
 export const reqProductInfo = (productId) => {
   return axios({
-    url: `${BASE_URL}/manage/product/info`,
+    url: `api/manage/product/info`,
     method: "get",
     params: {
       productId,
@@ -56,7 +56,7 @@ export const reqProductInfo = (productId) => {
 // 上架下架
 export const reqUpdateProductStatus = (productId, status) => {
   return axios({
-    url: `${BASE_URL}/manage/product/updateStatus`,
+    url: `api/manage/product/updateStatus`,
     method: "post",
     data: {
       productId,

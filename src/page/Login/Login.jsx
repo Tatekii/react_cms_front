@@ -6,7 +6,7 @@ import Corner from "@/component/githubCorner/githubCorner";
 import { connect } from "react-redux";
 import { saveUserAndToken } from "@/redux/reducers/login";
 import { reqLogin } from "@/api";
-import { Redirect } from "react-router-dom";
+import { Navigate,Routes } from "react-router-dom";
 
 import "./css/login.less";
 const { Item } = Form;
@@ -36,7 +36,9 @@ function Login(props) {
 	// 自动登录
 	const { isLogin } = props;
 	if (isLogin) {
-		return <Redirect to="/admin" />;
+		return (
+				<Navigate to="/admin" replace/>
+		);
 	}
 
 	return (
@@ -48,11 +50,7 @@ function Login(props) {
 			<main className="main">
 				<section className="loginForm">
 					<div className="title">用户登录</div>
-					<Form
-						onFinish={handleFinish}
-						onFinishFailed={handleFinishFailed}
-						className="login-form"
-					>
+					<Form onFinish={handleFinish} onFinishFailed={handleFinishFailed} className="login-form">
 						<Item name="username" rules={nameValidator} initialValue={"admin"}>
 							<Input
 								prefix={<UserOutlined className="site-form-item-icon" />}

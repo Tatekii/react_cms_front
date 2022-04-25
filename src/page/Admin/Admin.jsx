@@ -1,4 +1,4 @@
-import { Redirect, Route, Switch } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 
 import Home from "@/page/Home/Home";
 import LeftNav from "@/page/Admin/LeftNav/LeftNav";
@@ -11,7 +11,7 @@ import Role from "@/page/Role/Role";
 import ChartsBar from "@/page/Charts/Bar";
 import ChartsLine from "@/page/Charts/Line";
 import ChartsPie from "@/page/Charts/Pie";
-import NotFound from "@/page/NotFound/NotFound"
+import NotFound from "@/page/NotFound/NotFound";
 
 import { Layout } from "antd";
 
@@ -20,10 +20,9 @@ const { Footer, Sider, Content } = Layout;
 
 /** 后台根组件 */
 function Admin() {
-
-	const { isLogin } = useSelector(state=>state.login)
+	const { isLogin } = useSelector((state) => state.login);
 	if (!isLogin) {
-		return <Redirect to="/login" />;
+		return <Navigate to="/login" replace />;
 	}
 
 	return (
@@ -34,18 +33,19 @@ function Admin() {
 			<Layout style={{ backgroundColor: "#1b1b1b" }}>
 				<Header />
 				<Content style={{ margin: "20px", backgroundColor: "#242424" }}>
-					<Switch>
-						<Redirect from="/admin" exact to="/home" />
-						<Route path="/home" component={Home} />
-						<Route path="/products/category" component={Category} />
-						<Route path="/products/product" component={Product} />
-						<Route path="/user" component={User} />
-						<Route path="/role" component={Role} />
-						<Route path="/charts/bar" component={ChartsBar} />
-						<Route path="/charts/line" component={ChartsLine} />
-						<Route path="/charts/pie" component={ChartsPie} />
-						<Route component={NotFound} />
-					</Switch>
+					<Routes>
+						{" "}
+						<Navigate from="/admin" exact to="/home" replace />
+						<Route path="/home" element={<Home />} />
+						<Route path="/products/category" element={<Category />} />
+						<Route path="/products/manage" element={<Product />} />
+						<Route path="/user" element={<User />} />
+						<Route path="/role" element={<Role />} />
+						<Route path="/charts/bar" element={<ChartsBar />} />
+						<Route path="/charts/line" element={<ChartsLine />} />
+						<Route path="/charts/pie" element={<ChartsPie />} />
+						<Route element={<NotFound />} />
+					</Routes>
 				</Content>
 				<Footer
 					style={{
@@ -62,4 +62,4 @@ function Admin() {
 	);
 }
 
-export default Admin
+export default Admin;

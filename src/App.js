@@ -1,15 +1,18 @@
-import Login from "@/page/Login/Login.jsx";
-import Admin from "@/page/Admin/Admin.jsx";
-import { Switch, Route } from "react-router-dom";
+import { lazy, Suspense } from "react";
+
+import ErrorBoundary from "@/components/ErrorBoundary";
+import { FullPageErrorFallback, FullPageLoading } from "@/components/lib";
+
+const AuthenticatedApp = lazy(() => import("./AuthenticateApp"));
+const UnAuthenticateApp = lazy("./UnAuthenticateApp");
 
 function App() {
+  const { user } = useAuth();
+
   return (
-    <>
-      <Switch>
-        <Route path="/login" component={Login}></Route>
-        <Route path="/" component={Admin}></Route>
-      </Switch>
-    </>
+    <ErrorBoundary fallbackRender={FullPageErrorFallback}>
+      <Suspense fallback={<FullPageLoading />}></Suspense>
+    </ErrorBoundary>
   );
 }
 
