@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import menuList from "@/config/menu";
 
-export default function useTitle(pathname) {
+export default function useTitle() {
 	const [title, setTitle] = useState("");
+	const {pathname} = useLocation()
 
 	useEffect(() => {
 		// 根据路径更新标题
@@ -30,5 +32,7 @@ export default function useTitle(pathname) {
 		};
 		getTitle();
 	}, [pathname]);
+
+	
 	return title;
 }

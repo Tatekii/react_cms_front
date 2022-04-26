@@ -42,8 +42,6 @@ export default function LeftNav() {
 				selectedKeys={pathname.split("/").reverse()[0]}
 				defaultOpenKeys={pathname.split("/").splice(1)}
 				mode="inline"
-				theme="dark"
-				style={{ backgroundColor: "#1b1b1b" }}
 			>
 				{createMenu(menuList)}
 			</Menu>

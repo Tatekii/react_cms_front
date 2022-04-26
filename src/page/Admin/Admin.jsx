@@ -19,13 +19,13 @@ const { Footer, Sider, Content } = Layout;
 /** 后台根组件 */
 function Admin() {
 	return (
-		<Layout style={{ height: "100%", color: "#fff" }}>
-			<Sider>
+		<Layout>
+			<Sider className="bg-white">
 				<LeftNav />
 			</Sider>
-			<Layout style={{ backgroundColor: "#1b1b1b" }}>
+			<Layout>
 				<Header />
-				<Content style={{ margin: "20px", backgroundColor: "#242424" }}>
+				<Content >
 					<Routes>
 						<Route path="/" element={<Home />}>
 							<Route path="home" element={<Home />} />
@@ -40,14 +40,7 @@ function Admin() {
 						</Route>
 					</Routes>
 				</Content>
-				<Footer
-					style={{
-						textAlign: "center",
-						color: "#F90",
-						fontWeight: "bold",
-						backgroundColor: "#242424",
-					}}
-				>
+				<Footer>
 					推荐使用Chrome浏览器，可以获得更佳页面操作体验
 				</Footer>
 			</Layout>

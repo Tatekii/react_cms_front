@@ -31,9 +31,9 @@ module.exports = override(
   addLessLoader({
     lessOptions: {
       javascriptEnabled: true,
-      modifyVars: {
-        darkTheme,
-      },
+      // modifyVars: {
+      //   darkTheme,
+      // },
     },
   }),
   addWebpackAlias({

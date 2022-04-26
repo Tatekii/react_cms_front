@@ -1,4 +1,4 @@
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode, useContext } from "react";
 import * as auth from "./auth-handler";
 import { AuthForm } from "./types";
 import { User } from "./types";
@@ -33,7 +33,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
 /** auth context 消费Hook */
 export const useAuth = () => {
-  const context = React.useContext(AuthContext);
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("use context in your provider!");
+  }
   return context;
 };
 
