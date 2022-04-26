@@ -2,11 +2,8 @@
 import axios from "axios";
 import { message } from "antd";
 import NProgress from "nprogress";
-import store from "@/redux/index";
-import {
-  deleteUserAndToken,
-  default as LoginSlice,
-} from "@/redux/reducers/login";
+import { getToken } from "auth/auth-handler";
+
 import "nprogress/nprogress.css";
 
 const reqService = axios.create({
@@ -21,7 +18,7 @@ reqService.interceptors.request.use(
       NProgress.start();
     }
     // redux中取出token加入请求
-    let token = store.getState()?.login?.token;
+    let token = getToken();
     if (token) {
       config.headers.Authorization = `bearer ${token}`;
     }
@@ -38,6 +35,7 @@ reqService.interceptors.response.use(
     return response.data;
   },
   (error) => {
+    console.log(error);
     NProgress.done();
     if (error.response.status === 401) {
       /**
@@ -46,7 +44,6 @@ reqService.interceptors.response.use(
       const { status, msg } = error.response.data;
       if (status === 2) {
         message.error(`${msg}，请重新登录`, 2);
-        LoginSlice.dispatch(deleteUserAndToken);
       }
     } else {
       message.error(error.message, 2);

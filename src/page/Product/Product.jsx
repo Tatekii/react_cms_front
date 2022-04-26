@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import ProductHome from "./ProductHome";
 import ProductAddUpdate from "./ProductAddUpdate";
@@ -12,11 +12,10 @@ import "./index.less";
 export default function Product() {
 	return (
 		<>
-			<Navigate to="/products/product/home" replace />
 			<Routes>
-				<Route path="/products/product/" element={<ProductHome />} exact />
-				<Route path="/products/product/addupdate" element={<ProductAddUpdate />} />
-				<Route path="/products/product/detail" element={<ProductDetail />} />
+				<Route path="/products/manage" element={<ProductHome />} />
+				<Route path="/products/manage/addupdate" element={<ProductAddUpdate />} />
+				<Route path="/products/manage/detail" element={<ProductDetail />} />
 			</Routes>
 		</>
 	);

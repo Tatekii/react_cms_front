@@ -1,4 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {
+  configureStore,
+  createSelector,
+  createDraftSafeSelector,
+} from "@reduxjs/toolkit";
 import logger from "redux-logger";
 import { CATEGORY_KEY, default as CategorySlice } from "./reducers/category";
 import { LOGIN_KEY, default as LoginSlice } from "./reducers/login";
@@ -15,6 +19,5 @@ const MainStore = configureStore({
   devTools: process.env !== "production",
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
-console.log(MainStore);
 
 export default MainStore;

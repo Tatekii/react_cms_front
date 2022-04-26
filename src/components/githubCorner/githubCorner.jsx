@@ -5,7 +5,7 @@ export default function githubCorner() {
 	return (
 		<>
 			<a
-				href="https://github.com/Tatekii/react-cms"
+				href="https://github.com/Tatekii"
 				className="github-corner"
 				aria-label="View source on GitHub"
 			>

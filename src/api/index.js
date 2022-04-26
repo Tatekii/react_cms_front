@@ -2,12 +2,7 @@ import axios from "./request";
 import { A_MAP_KEY } from "@/config";
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
 
-/** 登录请求 */
-export const reqLogin = (username, password) =>
-  axios.post(`api/login`, { username, password });
-
 // 删除图片
-
 export const reqDeleteImg = (name) =>
   axios.post(`api/manage/img/delete`, { name });
 

@@ -1,11 +1,9 @@
 import { ExclamationCircleOutlined,LogoutOutlined } from "@ant-design/icons";
-import { deleteUserAndToken } from "@/redux/reducers/login";
-import { useDispatch } from "react-redux";
-
 import { Modal,Button } from "antd";
+import { useAuth } from "auth/auth-context";
 
 export default function useLogout() {
-	const dispatch = useDispatch()
+	const {logout} = useAuth()
 
 
 	const handleLogout = () => {
@@ -15,7 +13,7 @@ export default function useLogout() {
 			okText: "确认",
 			cancelText: "取消",
 			onOk: () => {
-				dispatch(deleteUserAndToken())
+				logout()
 			},
 		});
 	};
