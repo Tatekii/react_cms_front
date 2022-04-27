@@ -1,8 +1,8 @@
-// 封装请求
+// 封装请求客户端
 import axios from "axios";
 import { message } from "antd";
 import NProgress from "nprogress";
-import { getToken } from "auth/auth-handler";
+import { getToken } from "@/auth/auth-handler";
 
 import "nprogress/nprogress.css";
 

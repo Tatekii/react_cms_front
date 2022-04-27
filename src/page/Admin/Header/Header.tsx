@@ -4,7 +4,7 @@ import Weather from "./Weather";
 import FullScreen from "./Fullscreen";
 import Logout from "./Logout";
 import "./index.less";
-import { useAuth } from "auth/auth-context";
+import { useAuth } from "@/auth/auth-context";
 
 export default function Header() {
   const title = useTitle();

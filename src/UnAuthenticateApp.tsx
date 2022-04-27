@@ -1,4 +1,4 @@
-import Login from "page/Login/Login";
+import Login from "@/page/Login/Login";
 const UnAuthenticateApp = () => {
   return <Login />;
 };

@@ -4,7 +4,7 @@ import axios from "../request";
 // 请求商品列表
 export const reqProductList = (pageNum, pageSize) => {
   return axios({
-    url: `api/manage/product/list`,
+    url: `/api/product/list`,
     method: "get",
     params: {
       pageNum,
@@ -16,7 +16,7 @@ export const reqProductList = (pageNum, pageSize) => {
 // 添加商品
 export const reqAddOrUpdateProduct = (productObj) => {
   return axios({
-    url: `api/manage/product/${productObj._id ? "update" : "add"}`,
+    url: `/api/product/${productObj._id ? "update" : "add"}`,
     method: "post",
     data: {
       productObj,
@@ -32,7 +32,7 @@ export const reqSearchProduct = ({
   searchKeyword,
 }) => {
   return axios({
-    url: `api/manage/product/search`,
+    url: `/api/product/search`,
     method: "get",
     params: {
       pageNum,
@@ -45,7 +45,7 @@ export const reqSearchProduct = ({
 // 用id请求商品
 export const reqProductInfo = (productId) => {
   return axios({
-    url: `api/manage/product/info`,
+    url: `/api/product/info`,
     method: "get",
     params: {
       productId,
@@ -56,7 +56,7 @@ export const reqProductInfo = (productId) => {
 // 上架下架
 export const reqUpdateProductStatus = (productId, status) => {
   return axios({
-    url: `api/manage/product/updateStatus`,
+    url: `/api/product/updateStatus`,
     method: "post",
     data: {
       productId,

@@ -1,23 +1,22 @@
 import { React } from "react";
 import { Card, Button, Table, Space } from "antd";
-import {  PlusCircleOutlined } from "@ant-design/icons";
+import { PlusCircleOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import useGetProductList from "./useGetProductList";
 import useSearch from "./useSearch";
-import useChangeStatus from './useChangeStatus'
+import useChangeStatus from "./useChangeStatus";
 import { PAGE_SIZE } from "@/config";
-
 
 export default function Product() {
 	// 请求的数据,本地修改数据方法,修改请求的参数
-	const {dataSource,setDataSource,setPageProps,setSearchProps} = useGetProductList()
-	const statusUI = useChangeStatus
+	const { dataSource, setDataSource, setPageProps, setSearchProps } = useGetProductList();
+	const statusUI = useChangeStatus;
 
 	// 由于后端分页,这里再发请求
 	const handleTableChange = (pagination) => {
 		const { current, pageSize } = pagination;
-		console.log({current, pageSize});
-		setPageProps({current, pageSize})
+		console.log({ current, pageSize });
+		setPageProps({ current, pageSize });
 	};
 
 	const columns = [
@@ -43,7 +42,7 @@ export default function Product() {
 		{
 			title: "状态",
 			render: (item) => {
-				return (statusUI(item));
+				return statusUI(item);
 			},
 			key: "status",
 			width: "5%",
@@ -62,9 +61,7 @@ export default function Product() {
 							</Button>
 						</NavLink>
 						<NavLink to={{ pathname: "/products/product/addUpdate", state: { id } }}>
-							<Button type="link" >
-								修改
-							</Button>
+							<Button type="link">修改</Button>
 						</NavLink>
 					</Space>
 				);
@@ -75,17 +72,17 @@ export default function Product() {
 	];
 
 	// 把修改搜索关键词的方法传给useSearch
-	const searchUI = useSearch(setSearchProps)
+	const searchUI = useSearch(setSearchProps);
 	return (
 		<>
 			<Card
-				title={
-					(searchUI)
-				}
+				title={searchUI}
 				extra={
-					<Button type="primary" icon={<PlusCircleOutlined />}>
-						添加
-					</Button>
+					<NavLink to={{ pathname: "/products/manage/addUpdate", state: {} }}>
+						<Button type="primary" icon={<PlusCircleOutlined />}>
+							添加
+						</Button>
+					</NavLink>
 				}
 			>
 				<Table
@@ -94,9 +91,9 @@ export default function Product() {
 					columns={columns}
 					rowKey="_id"
 					pagination={{
-						current:dataSource?.current,
+						current: dataSource?.current,
 						pageSize: PAGE_SIZE,
-						total:dataSource?.total,
+						total: dataSource?.total,
 						showQuickJumper: true,
 					}}
 					onChange={handleTableChange}

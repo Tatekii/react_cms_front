@@ -3,8 +3,7 @@ import { A_MAP_KEY } from "@/config";
 // const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 // 删除图片
-export const reqDeleteImg = (name) =>
-  axios.post(`api/manage/img/delete`, { name });
+export const reqDeleteImg = (name) => axios.post(`/api/img/delete`, { name });
 
 // 定位
 export const reqLocationRequest = (ak, coords) => {
@@ -35,22 +34,22 @@ export const reqWeather = (cityCode) => {
 };
 
 //商品分类列表
-export const reqCategoryList = () => axios.get(`api/manage/category/list`);
+export const reqCategoryList = () => axios.get(`/api/category/list`);
 
 //更新商品分类
 export const reqUpdateCategory = (categoryId, categoryName) =>
-  axios.post(`api/manage/category/update`, {
+  axios.post(`/api/category/update`, {
     categoryId,
     categoryName,
   });
 
 //新增商品分类
 export const reqAddCategory = (categoryName) =>
-  axios.post(`api/manage/category/add`, { categoryName });
+  axios.post(`/api/category/add`, { categoryName });
 
 //获取商品分类信息
 export const reqCategoryView = (categoryId) =>
-  axios.get(`api/manage/category/info`, {
+  axios.get(`/api/category/info`, {
     params: {
       categoryId,
     },
@@ -58,7 +57,7 @@ export const reqCategoryView = (categoryId) =>
 
 //商品分页列表
 export const reqProductPaginationList = (pageNum, pageSize) =>
-  axios.get(`api/manage/product/list`, {
+  axios.get(`/api/product/list`, {
     params: {
       pageNum,
       pageSize,
@@ -67,7 +66,7 @@ export const reqProductPaginationList = (pageNum, pageSize) =>
 
 //更新商品状态
 export const reqProductUpdateStatus = (productId, status) =>
-  axios.post(`api/manage/product/updateStatus`, {
+  axios.post(`/api/product/updateStatus`, {
     productId,
     status,
   });
@@ -79,7 +78,7 @@ export const reqProductSearchPaginationList = (
   searchType,
   searchKey
 ) =>
-  axios.get(`api/manage/product/search`, {
+  axios.get(`/api/product/search`, {
     params: {
       pageNum,
       pageSize,
@@ -89,7 +88,7 @@ export const reqProductSearchPaginationList = (
 
 //商品的详细信息
 export const reqProductView = (productId) =>
-  axios.get(`api/manage/product/info`, {
+  axios.get(`/api/product/info`, {
     params: { productId },
   });
 
@@ -103,7 +102,7 @@ export const reqAddProduct = (
   imgs,
   detail
 ) =>
-  axios.post(`api/manage/product/add`, {
+  axios.post(`/api/product/add`, {
     categoryId,
     name,
     price,
@@ -115,7 +114,7 @@ export const reqAddProduct = (
 
 //根据图片唯一名删除图片
 export const reqDeletePicture = (name) =>
-  axios.post(`api/manage/img/delete`, { name });
+  axios.post(`/api/img/delete`, { name });
 
 //更新商品信息
 export const reqUpdateProduct = (
@@ -128,7 +127,7 @@ export const reqUpdateProduct = (
   detail,
   _id
 ) =>
-  axios.post(`api/manage/product/update`, {
+  axios.post(`/api/product/update`, {
     categoryId,
     name,
     price,
@@ -141,11 +140,11 @@ export const reqUpdateProduct = (
 
 //添加角色
 export const reqAddRole = (roleName) =>
-  axios.post(`api/manage/role/add`, { roleName });
+  axios.post(`/api/role/add`, { roleName });
 
 //角色分页列表
 export const reqRolePaginationList = (pageNum, pageSize) =>
-  axios.get(`api/manage/role/list`, {
+  axios.get(`/api/role/list`, {
     params: {
       pageNum,
       pageSize,
@@ -154,18 +153,18 @@ export const reqRolePaginationList = (pageNum, pageSize) =>
 
 //分配权限
 export const reqAllocatePermission = (id, menus, authName) =>
-  axios.post(`api/manage/role/update`, {
+  axios.post(`/api/role/update`, {
     _id: id,
     menus,
     auth_name: authName,
   });
 
 //分页显示用户列表
-export const reqUserList = () => axios.get(`api/manage/user/list`);
+export const reqUserList = () => axios.get(`/api/user/list`);
 
 //创建用户
 export const reqAddUser = (username, password, email, phone, role_id) =>
-  axios.post(`api/manage/user/add`, {
+  axios.post(`/api/user/add`, {
     username,
     password,
     email,
@@ -175,4 +174,4 @@ export const reqAddUser = (username, password, email, phone, role_id) =>
 
 //删除用户
 export const reqDeleteUser = (userId) =>
-  axios.post(`api/manage/user/delete`, { userId });
+  axios.post(`/api/user/delete`, { userId });

@@ -1,7 +1,7 @@
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-import Corner from "../../components/GithubCorner/index";
-import { useAuth } from "auth/auth-context";
+import Corner from "@/components/GithubCorner/index";
+import { useAuth } from "@/auth/auth-context";
 import "./login.less";
 const { Item } = Form;
 

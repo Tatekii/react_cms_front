@@ -3,9 +3,8 @@ import screenfull from "screenfull";
 import { Button } from "antd";
 import { FullscreenOutlined, FullscreenExitOutlined } from "@ant-design/icons";
 
-export default function useFullscreen() {
+export default function Fullscreen() {
   const [isFullscreen, setFullscreen] = useState(false);
-  console.log(screenfull);
 
   const toggleFullscreen = () => {
     setFullscreen(!isFullscreen);

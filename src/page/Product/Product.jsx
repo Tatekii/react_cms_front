@@ -13,9 +13,9 @@ export default function Product() {
 	return (
 		<>
 			<Routes>
-				<Route path="/products/manage" element={<ProductHome />} />
-				<Route path="/products/manage/addupdate" element={<ProductAddUpdate />} />
-				<Route path="/products/manage/detail" element={<ProductDetail />} />
+				<Route path="/" element={<ProductHome />} />
+				<Route path="/addUpdate" element={<ProductAddUpdate />} />
+				<Route path="/detail" element={<ProductDetail />} />
 			</Routes>
 		</>
 	);

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 
 /** 获取时间hooks */
-export default function useCurrentTime() {
+export default function CurrentTime() {
   const [currentTime, setTime] = useState<string>();
   useEffect(() => {
     const timer = setInterval(() => {

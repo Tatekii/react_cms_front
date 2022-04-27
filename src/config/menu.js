@@ -20,7 +20,7 @@ const menuList = [
       },
       {
         title: "商品管理",
-        key: "product",
+        key: "manage",
         path: "/products/manage",
         icon: "ToolOutlined",
       },
