@@ -3,14 +3,14 @@ import axios from "axios";
 import { message } from "antd";
 import NProgress from "nprogress";
 import { getToken } from "@/auth/auth-handler";
-
+import { useAuth } from "@/auth/auth-context";
 import "nprogress/nprogress.css";
 
-const reqService = axios.create({
+const http = axios.create({
   timeout: 5000,
 });
 
-reqService.interceptors.request.use(
+http.interceptors.request.use(
   (config) => {
     const { url } = config;
     if (url !== "/weather" && url !== "/location") {
@@ -29,7 +29,7 @@ reqService.interceptors.request.use(
   }
 );
 
-reqService.interceptors.response.use(
+http.interceptors.response.use(
   (response) => {
     NProgress.done();
     return response.data;
@@ -44,6 +44,8 @@ reqService.interceptors.response.use(
       const { status, msg } = error.response.data;
       if (status === 2) {
         message.error(`${msg}，请重新登录`, 2);
+        //
+        useAuth().logout();
       }
     } else {
       message.error(error.message, 2);
@@ -53,4 +55,4 @@ reqService.interceptors.response.use(
   }
 );
 
-export default reqService;
+export default http;

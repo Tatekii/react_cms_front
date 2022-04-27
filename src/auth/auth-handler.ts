@@ -1,8 +1,8 @@
 /** 鉴权相关方法 */
 import { message } from "antd";
-import { AxiosResponse } from "axios";
+import { AxiosResponse } from "http";
 import store from "store";
-import axios from "../api/request";
+import http from "../api/http";
 import { AuthForm } from "./types";
 
 const localStorageKey = "__auth_provider_token__";
@@ -15,7 +15,7 @@ const handleUserResponse = ({ data }: AxiosResponse) => {
 };
 /** 登录 */
 export const login = async ({ username, password }: AuthForm) =>
-  await axios.post(`api/login`, { username, password }).then((r) => {
+  await http.post(`api/login`, { username, password }).then((r) => {
     if (r.status !== 0) {
       message.error("登录失败", 2);
       return;

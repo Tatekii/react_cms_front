@@ -1,32 +1,39 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { reqWeather } from "@/api/index";
 import reqLocation from "@/api/reqLocation";
+import { message } from "antd";
+import useMount from "@/hooks/useMount";
 
 /** 获取天气hooks */
 export default function Weather() {
-  const [weather, setWeather] = useState<any>({});
-  const [city, setCity] = useState("loading...");
+  const [weather, setWeather] = useState<{
+    temperature?: string;
+    weather?: string;
+  }>({});
+  const [city, setCity] = useState<string>("loading...");
 
-  useEffect(() => {
+  useMount(() => {
     const getWeather = async () => {
-      let locationRes: any = null;
-      try {
-        locationRes = await reqLocation();
-        const { city, adcode } = locationRes.result.addressComponent;
-        setCity(() => city);
-        const res: any = await reqWeather(adcode);
-        if (res.status === "1") {
-          setWeather(() => res.lives[0]);
-        }
-      } catch (e: any) {
-        // 用户浏览器没开启定位权限
-        if (e.code === 1 || e.message === '"User denied Geolocation"') {
-          setWeather({});
-        }
+      const [err, res] = await reqLocation();
+      // 没有拿到地理位置
+      if (err) {
+        message.error(err.message);
+        return;
+      }
+      // 拿到了位置
+      const { city, adcode } = res.result.addressComponent;
+      // 设置城市
+      setCity(city);
+      // 请求天气
+      const [e, r] = await reqWeather(adcode);
+      if (e) {
+        return;
+      } else {
+        setWeather(() => r?.lives[0]);
       }
     };
     getWeather();
-  }, []);
+  });
 
   return (
     <>
@@ -38,7 +45,7 @@ export default function Weather() {
         <>
           <span>{weather.temperature}摄氏度</span>
           <span>「{weather.weather}」</span>
-          <span>当前:{city}</span>
+          <span>🏙{city}</span>
         </>
       ) : (
         <span>无法获取当前位置</span>

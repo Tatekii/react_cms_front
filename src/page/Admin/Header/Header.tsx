@@ -1,4 +1,4 @@
-import useTitle from "./useTitle"; // path转中文页面标题
+import useTitle from "./useTitle";
 import Clock from "./Clock";
 import Weather from "./Weather";
 import FullScreen from "./Fullscreen";
