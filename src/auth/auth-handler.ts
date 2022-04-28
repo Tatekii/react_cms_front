@@ -1,6 +1,6 @@
 /** 鉴权相关方法 */
 import { message } from "antd";
-import { AxiosResponse } from "http";
+import { AxiosResponse } from "axios";
 import store from "store";
 import http from "../api/http";
 import { AuthForm } from "./types";

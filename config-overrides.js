@@ -3,7 +3,6 @@ const {
   fixBabelImports,
   addLessLoader,
   addWebpackAlias,
-  addPostcssPlugins,
   addWebpackResolve,
 } = require("customize-cra");
 const { resolve } = require("path");
@@ -26,7 +25,6 @@ module.exports = override(
   addWebpackAlias({
     "@": resolve(__dirname, "src"),
   }),
-  addPostcssPlugins([require("tailwindcss"), require("autoprefixer")]),
   addWebpackResolve({
     extensions: [".js", ".jsx", ".ts", ".tsx"],
   })

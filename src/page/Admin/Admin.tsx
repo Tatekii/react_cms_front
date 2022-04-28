@@ -1,9 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 
 import Home from "@/page/Home/Home";
-import LeftNav from "@/page/Admin/LeftNav/LeftNav";
-import Header from "@/page/Admin/Header/Header";
-
+import LeftNav from "./LeftNav/LeftNav";
+import PageHeader from "./PageHeader/PageHeader";
 import Category from "@/page/Category/Category";
 import Product from "@/page/Product/Product";
 import User from "@/page/User/User";
@@ -23,8 +22,8 @@ function Admin() {
       <Sider className="bg-white">
         <LeftNav />
       </Sider>
-      <Layout>
-        <Header />
+      <Layout style={{ minHeight: "100vh" }}>
+        <PageHeader />
         <Content style={{ minWidth: "1200px" }}>
           <Routes>
             <Route path="/" element={<Home />} />

@@ -73,16 +73,13 @@
 	"devDependencies": {
 		"@commitlint/cli": "^16.2.3",
 		"@commitlint/config-conventional": "^16.2.1",
-		"autoprefixer": "^9",
 		"commitizen": "^4.2.4",
 		"cz-conventional": "0.0.2",
 		"cz-conventional-changelog": "3.3.0",
 		"eslint-config-prettier": "^8.5.0",
 		"husky": ">=6",
 		"lint-staged": ">=10",
-		"postcss": "^7",
-		"prettier": "^2.6.2",
-		"tailwindcss": "npm:@tailwindcss/postcss7-compat"
+		"prettier": "^2.6.2"
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,css,md}": "prettier --write"
