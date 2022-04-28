@@ -2,10 +2,10 @@ import { createElement } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Menu } from "antd";
 import * as Icons from "@ant-design/icons";
-import "./index.less";
 import logo from "@/assets/img/logo.png";
 import menuList from "@/config/menu";
 import { MenuItem } from "@/config/types";
+import styled from "@emotion/styled";
 
 const { SubMenu, Item } = Menu;
 
@@ -35,12 +35,18 @@ export default function LeftNav() {
     });
   };
 
+  const MyLink = styled(NavLink)`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+  `;
+
   return (
-    <div className="left-nav">
-      <NavLink to="/home" className="left-nav-header">
+    <>
+      <MyLink to="/home">
         <img src={logo} alt="logo" />
-        <h1>后台管理系统</h1>
-      </NavLink>
+      </MyLink>
       <Menu
         // @ts-ignore
         selectedKeys={pathname.split("/").reverse()[0]}
@@ -49,6 +55,6 @@ export default function LeftNav() {
       >
         {createMenu(menuList)}
       </Menu>
-    </div>
+    </>
   );
 }

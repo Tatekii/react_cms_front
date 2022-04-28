@@ -1,0 +1,19 @@
+/* 全剧样式 */
+:root {
+  --tsc: #9966aa;
+}
+
+html {
+  font-size: 62.5%;
+  /* 1rem = 10px */
+}
+
+html body #root {
+  min-height: 100vh;
+  min-width: 1200px;
+}
+
+/* 修改nav菜单背景色 */
+.ant-layout-sider {
+  background: var(--tsc) !important;
+}

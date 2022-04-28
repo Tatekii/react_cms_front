@@ -1,6 +1,6 @@
 import { Chart, Geom, Axis, Tooltip, Legend } from "bizcharts";
 import DataSet from "@antv/data-set";
-import { useEffect, useState } from "react";
+import { useEffect, useState, memo } from "react";
 
 interface LineChart {
   month: string;
@@ -8,7 +8,7 @@ interface LineChart {
   b: number;
   c: number;
 }
-export default function Line() {
+export default memo(function Line() {
   const [chartData, setChartData] = useState<LineChart[]>([]);
   const [data, setData] = useState<any>({});
   // 假装请求数据
@@ -145,4 +145,4 @@ export default function Line() {
       />
     </Chart>
   );
-}
+});

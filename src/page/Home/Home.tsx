@@ -7,10 +7,10 @@ import {
   ReloadOutlined,
 } from "@ant-design/icons";
 import moment from "moment";
-
 import Line from "./Line";
 import Bar from "./Bar";
-import "./index.less";
+import styled from "@emotion/styled";
+import { Row, Button } from "antd";
 
 const dateFormat = "YYYY/MM/DD";
 const { RangePicker } = DatePicker;
@@ -21,12 +21,22 @@ export default function Home() {
   const handleChange = (f: boolean) => {
     return () => setVisited(f);
   };
+
+  const LineContainer = styled.div`
+    flex: 1;
+    overflow: hidden;
+  `;
+
+  const MyRow = styled(Row)`
+    display: flex;
+    justify-content: space-between;
+  `;
+
   return (
-    <div className="home">
-      <div className="flex justify-between gap-10">
+    <Card>
+      <MyRow>
         {/* 总量 */}
         <Card
-          className="home-card"
           title="商品总量"
           extra={<QuestionOutlined />}
           style={{ flexBasis: 250, flexShrink: 0 }}
@@ -51,17 +61,16 @@ export default function Home() {
           />
         </Card>
         {/* 折线图 */}
-        <div className="flex-1 overflow-hidden">
+        <LineContainer>
           <Line />
-        </div>
-      </div>
+        </LineContainer>
+      </MyRow>
 
       <Card
-        className="home-content"
         style={{ width: "100%" }}
         title={
-          <div className="home-menu">
-            <span
+          <>
+            <Button
               className={
                 isVisited
                   ? "home-menu-active home-menu-visited"
@@ -70,14 +79,14 @@ export default function Home() {
               onClick={handleChange(true)}
             >
               访问量
-            </span>
-            <span
+            </Button>
+            <Button
               className={isVisited ? "" : "home-menu-active"}
               onClick={handleChange(false)}
             >
               销售量
-            </span>
-          </div>
+            </Button>
+          </>
         }
         extra={
           <RangePicker
@@ -89,35 +98,37 @@ export default function Home() {
           />
         }
       >
-        <Card
-          className="home-table-left"
-          title={isVisited ? "访问趋势" : "销售趋势"}
-          bodyStyle={{ padding: 0, height: 275 }}
-          extra={<ReloadOutlined style={{ color: "red" }} />}
-        >
-          <Bar />
-        </Card>
+        <MyRow>
+          <Card
+            style={{ width: "60%" }}
+            title={isVisited ? "访问趋势" : "销售趋势"}
+            bodyStyle={{ padding: 0, height: 275 }}
+            extra={<ReloadOutlined style={{ color: "red" }} />}
+          >
+            <Bar />
+          </Card>
 
-        <Card
-          title="任务"
-          extra={<ReloadOutlined />}
-          className="home-table-right"
-        >
-          <Timeline>
-            <Timeline.Item color="green">新版本迭代会</Timeline.Item>
-            <Timeline.Item color="green">完成网站设计初版</Timeline.Item>
-            <Timeline.Item color="red">
-              <p>联调接口</p>
-              <p>功能验收</p>
-            </Timeline.Item>
-            <Timeline.Item>
-              <p>登录功能设计</p>
-              <p>权限验证</p>
-              <p>页面排版</p>
-            </Timeline.Item>
-          </Timeline>
-        </Card>
+          <Card
+            title="任务"
+            extra={<ReloadOutlined />}
+            className="home-table-right"
+          >
+            <Timeline>
+              <Timeline.Item color="green">新版本迭代会</Timeline.Item>
+              <Timeline.Item color="green">完成网站设计初版</Timeline.Item>
+              <Timeline.Item color="red">
+                <p>联调接口</p>
+                <p>功能验收</p>
+              </Timeline.Item>
+              <Timeline.Item>
+                <p>登录功能设计</p>
+                <p>权限验证</p>
+                <p>页面排版</p>
+              </Timeline.Item>
+            </Timeline>
+          </Card>
+        </MyRow>
       </Card>
-    </div>
+    </Card>
   );
 }

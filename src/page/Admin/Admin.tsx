@@ -12,9 +12,23 @@ import ChartsLine from "@/page/Charts/Line";
 import ChartsPie from "@/page/Charts/Pie";
 import NotFound from "@/page/NotFound/NotFound";
 import { Layout } from "antd";
+import styled from "@emotion/styled";
 
 const { Footer, Sider, Content } = Layout;
 
+const MyFooter = styled.footer`
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--tsc);
+  line-height: 40px;
+  height: 40px;
+  background: #fff;
+`;
+
+const MyContent = styled(Content)`
+  height: calc(100vh - 130px);
+  overflow: auto;
+`;
 /** 后台根组件 */
 function Admin() {
   return (
@@ -22,9 +36,9 @@ function Admin() {
       <Sider className="bg-white">
         <LeftNav />
       </Sider>
-      <Layout style={{ minHeight: "100vh" }}>
+      <Layout>
         <PageHeader />
-        <Content style={{ minWidth: "1200px" }}>
+        <MyContent>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
@@ -37,8 +51,8 @@ function Admin() {
             <Route path="/charts/pie" element={<ChartsPie />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </Content>
-        <Footer>推荐使用Chrome浏览器，可以获得更佳页面操作体验</Footer>
+        </MyContent>
+        <MyFooter>推荐使用Chrome浏览器，可以获得更佳页面操作体验</MyFooter>
       </Layout>
     </Layout>
   );

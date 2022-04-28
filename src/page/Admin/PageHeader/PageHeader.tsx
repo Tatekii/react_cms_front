@@ -39,7 +39,7 @@ export default function PageHeader() {
       content: "";
       position: absolute;
       border: 20px solid transparent;
-      border-top: 20px solid #f90;
+      border-top: 20px solid var(--tsc);
       animation: 1s linear bounce infinite;
       z-index: 6;
     }

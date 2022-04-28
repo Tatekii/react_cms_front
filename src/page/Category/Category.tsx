@@ -3,8 +3,9 @@ import { PlusCircleOutlined } from "@ant-design/icons";
 import { reqCategoryList, reqAddCategory, reqUpdateCategory } from "@/api";
 import { PAGE_SIZE } from "@/config";
 import { saveCategory } from "@/redux/reducers/category";
-import { useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
+import useMount from "@/hooks/useMount";
 
 export default function Category() {
   const [formRef] = Form.useForm();
@@ -17,7 +18,8 @@ export default function Category() {
   const [updateModalCurrentId, setUpdateModalCurrentId] = useState("");
   const [updateModalCurrentValue, setUpdateModalCurrentValue] = useState("");
 
-  const getCategoryList = async () => {
+  // 请求并更新
+  const getCategoryList = useCallback(async () => {
     const res = await reqCategoryList();
     if (!res) return;
     if (res.status === 0) {
@@ -27,59 +29,40 @@ export default function Category() {
     } else {
       message.error("出错了", 2);
     }
-  };
+  }, [dispatch]);
 
-  useEffect(() => {
+  useMount(() => {
     getCategoryList();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  });
 
   /**
    * 显示新增分类的弹窗
    */
-  const handleShowAddModal = () => {
+  const handleShowAddModal = useCallback(() => {
     setEditType(0);
     setModalVisible(true);
-  };
+  }, []);
 
   /**
    * 显示更新分类的弹窗
    */
-  const handleShowUpdateModal = (item: { _id: string; name: string }) => {
-    //回显的数据
-    const { _id: categoryId, name: categoryName } = item;
-    //显示模态框，并将回显数据放到状态中
-    setUpdateModalCurrentId(categoryId);
-    setUpdateModalCurrentValue(categoryName);
-    setEditType(1);
-    setModalVisible(true);
-    formRef.resetFields();
-    //重置表单
-  };
+  const handleShowUpdateModal = useCallback(
+    (item: { _id: string; name: string }) => {
+      //回显的数据
+      const { _id: categoryId, name: categoryName } = item;
+      //显示模态框，并将回显数据放到状态中
+      setUpdateModalCurrentId(categoryId);
+      setUpdateModalCurrentValue(categoryName);
+      setEditType(1);
+      setModalVisible(true);
+      formRef.resetFields();
+      //重置表单
+    },
+    [formRef]
+  );
 
   /**
-   * 处理确认模态框
-   */
-  const handleOkModal = async () => {
-    try {
-      //表单的统一验证
-      const { categoryName } = await formRef.validateFields();
-      setLoading(false);
-      if (editType === 0) {
-        //新增分类的逻辑
-        handleAddCategory(categoryName);
-      } else {
-        //修改分类
-        //修改分类的逻辑
-        handleUpdateCategory(updateModalCurrentId, categoryName);
-      }
-    } catch (e) {
-      message.error("表单输入有误，请检查", 2);
-    }
-  };
-
-  /**
-   * 新增分类的业务逻辑
+   * 新增分类
    */
   const handleAddCategory = async (categoryName: string) => {
     const { status } = await reqAddCategory(categoryName);
@@ -96,7 +79,7 @@ export default function Category() {
   };
 
   /**
-   * 修改分类的业务逻辑
+   * 修改分类
    */
   const handleUpdateCategory = async (
     categoryId: string,
@@ -116,40 +99,32 @@ export default function Category() {
   };
 
   /**
-   * 取消模态框
+   * 点击确认
+   */
+  const handleOkModal = async () => {
+    try {
+      //表单的统一验证
+      const { categoryName } = await formRef.validateFields();
+      setLoading(false);
+      if (editType === 0) {
+        //新增分类的逻辑
+        handleAddCategory(categoryName);
+      } else {
+        //修改分类
+        //修改分类的逻辑
+        handleUpdateCategory(updateModalCurrentId, categoryName);
+      }
+    } catch (e) {
+      message.error("表单输入有误，请检查", 2);
+    }
+  };
+  /**
+   * 点击取消
    */
   const handleCancelModal = () => {
-    //重置表单
     formRef.resetFields();
-    //隐藏模态框
     setModalVisible(false);
   };
-
-  const columns: any[] = [
-    {
-      title: "分类名称",
-      dataIndex: "name",
-      key: "name",
-    },
-    {
-      title: "操作",
-      key: "operator",
-      render: (item: any) => (
-        <Button
-          type="link"
-          onClick={() => {
-            handleShowUpdateModal(item);
-          }}
-        >
-          修改分类
-        </Button>
-      ),
-      width: "25%",
-      align: "center",
-    },
-  ];
-
-  const getTitle = () => (editType === 0 ? "新增" : "修改");
 
   return (
     <div>
@@ -167,7 +142,29 @@ export default function Category() {
         <Table
           bordered={true}
           dataSource={categoryList}
-          columns={columns}
+          columns={[
+            {
+              title: "分类名称",
+              dataIndex: "name",
+              key: "name",
+            },
+            {
+              title: "操作",
+              key: "operator",
+              render: (item: any) => (
+                <Button
+                  type="link"
+                  onClick={() => {
+                    handleShowUpdateModal(item);
+                  }}
+                >
+                  修改分类
+                </Button>
+              ),
+              width: "25%",
+              align: "center",
+            },
+          ]}
           loading={isLoading}
           rowKey="_id"
           pagination={{ defaultPageSize: PAGE_SIZE, showQuickJumper: true }}
@@ -175,7 +172,7 @@ export default function Category() {
       </Card>
       {/* 新增分类和修改分类 */}
       <Modal
-        title={`${getTitle()}分类`}
+        title={`${editType === 0 ? "新增" : "修改"}分类`}
         visible={isModalVisible}
         onOk={handleOkModal}
         onCancel={handleCancelModal}
