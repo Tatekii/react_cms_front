@@ -9,7 +9,7 @@ import { PRODUCT_KEY, default as ProductSlice } from "./slices/product.slice";
 
 const { env } = process;
 
-const MainStore = configureStore({
+const store = configureStore({
   reducer: {
     [CATEGORY_KEY]: CategorySlice,
     // [LOGIN_KEY]: LoginSlice, // 登录态丢去context里面了
@@ -20,4 +20,8 @@ const MainStore = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 });
 
-export default MainStore;
+export default store;
+
+export type RootState = ReturnType<typeof store.getState>;
+
+export type AppDispatch = typeof store.dispatch;

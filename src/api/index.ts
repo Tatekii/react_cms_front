@@ -1,6 +1,7 @@
 import http from "./http";
 import { A_MAP_KEY } from "@/config";
-// const BASE_URL = process.env.REACT_APP_BASE_URL;
+import { CategoryItem } from "@/types";
+import { AxiosPromise } from "axios";
 
 // 删除图片
 export const reqDeleteImg = (name: string) =>
@@ -23,7 +24,8 @@ export const reqWeather = (cityCode: string) => {
 };
 
 //商品分类列表
-export const reqCategoryList = () => http.get(`/api/category/list`);
+export const reqCategoryList: () => AxiosPromise<CategoryItem[] | []> = () =>
+  http.get(`/api/category/list`);
 
 //更新商品分类
 export const reqUpdateCategory = (categoryId: string, categoryName: string) =>

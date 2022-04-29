@@ -8,8 +8,8 @@ const { reducer: MenuSlice, actions } = createSlice({
   name: MENU_KEY,
   initialState: "",
   reducers: {
-    saveTitle: (state, { payload }) => {
-      state = payload;
+    saveTitle: (state, action) => {
+      state = action.payload;
     },
   },
 });
