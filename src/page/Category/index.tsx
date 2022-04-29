@@ -2,7 +2,7 @@ import { Card, Button, Table, message, Modal, Form, Input } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { reqCategoryList, reqAddCategory, reqUpdateCategory } from "@/api";
 import { PAGE_SIZE } from "@/config";
-import { saveCategory } from "@/redux/reducers/category";
+import { saveCategory } from "@/redux/slices/category.slice";
 import { useCallback, useState } from "react";
 import { useDispatch } from "react-redux";
 import useMount from "@/hooks/useMount";

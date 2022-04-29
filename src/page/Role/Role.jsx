@@ -5,7 +5,8 @@ import dayjs from "dayjs";
 import { reqAddRole, reqRolePaginationList, reqAllocatePermission } from "@/api";
 import { PAGE_SIZE } from "@/config";
 import menuList from "@/config/menu";
-import { useSelector } from "react-redux";
+import { useAuth } from "@/auth/auth-context";
+import useMount from "@/hooks/useMount";
 
 /**
  * 角色管理组件
@@ -13,17 +14,19 @@ import { useSelector } from "react-redux";
 export default function Role() {
 	const addFormRef = useRef(null);
 	const authFormRef = useRef(null);
-	const userInfo = useSelector((state) => state.login.user);
+	const {user} = useAuth()
+
 	const [isShowAdd, setShowAdd] = useState(false); //是否显示新增权限模态框
 	const [isShowAuth, setShowAuth] = useState(false); //是否显示分配权限模态框
 	const [roleList, setRoleList] = useState([]); // 角色列表
 	const [_id, set_id] = useState("");
+
 	const [total, setTotal] = useState(0); // z总数
 	const [current, setCurrent] = useState(1); // 当前页面
 	const [checkedKeys, setCheckedKeys] = useState([]); //树形菜单选中的key
 	const [treeData, setTreeDate] = useState([]); //  树形菜单数据
 
-	useEffect(() => {
+	useMount(() => {
 		getRoleList(current, PAGE_SIZE);
 		let treeData = [
 			{
@@ -33,7 +36,7 @@ export default function Role() {
 			},
 		];
 		setTreeDate(treeData);
-	}, []);
+	});
 
 	//获取分页列表
 	const getRoleList = useCallback(
@@ -50,7 +53,7 @@ export default function Role() {
 		[total]
 	);
 
-	//表单变化
+	//表单变化 => 获取分页列表
 	const handleTableChange = useCallback(
 		(pagination) => {
 			const { current, pageSize } = pagination;
@@ -94,7 +97,7 @@ export default function Role() {
 	//分配权限确认模态框
 	const handleAuthOkModal = async () => {
 		//获取授权人
-		let authName = userInfo.username;
+		let authName = user.username;
 		const { status, msg } = await reqAllocatePermission(_id, checkedKeys, authName);
 		if (status === 0) {
 			message.success("分配权限成功", 2);

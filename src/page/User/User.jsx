@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
 import { Button, Card, Form, Input, message, Modal, Select, Table } from "antd";
 import { ExclamationCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import dayjs from "dayjs";
 import { reqUserList, reqAddUser, reqDeleteUser } from "@/api";
+import useMount from "@/hooks/useMount";
 
 const { Option } = Select;
 
@@ -15,10 +16,9 @@ export default function User() {
 	const [isShowAdd, setShowAdd] = useState(false);
 	const [roleList, setRoleList] = useState([]); //  角色列表
 
-	useEffect(() => {
+	useMount(() => {
 		getUserList();
-	}, []);
-
+	});
 
 	const getUserList = useCallback(async () => {
 		const { status, data, msg } = await reqUserList();
@@ -39,7 +39,7 @@ export default function User() {
 			if (status === 0) {
 				message.success("新增用户成功", 2);
 				setShowAdd(false);
-				addFormRef.current.resetFields()
+				addFormRef.current.resetFields();
 				getUserList();
 			} else {
 				message.error(msg, 2);
@@ -152,12 +152,7 @@ export default function User() {
 					</Button>
 				}
 			>
-				<Table
-					bordered={true}
-					rowKey={"_id"}
-					dataSource={userList}
-					columns={columns}
-				/>
+				<Table bordered={true} rowKey={"_id"} dataSource={userList} columns={columns} />
 			</Card>
 			{/* 添加用户的模态框 */}
 			<Modal
@@ -167,7 +162,7 @@ export default function User() {
 				cancelText="取消"
 				onOk={handleAddOkModal}
 				onCancel={() => {
-					addFormRef.current.resetFields()
+					addFormRef.current.resetFields();
 					setShowAdd(false);
 				}}
 			>
