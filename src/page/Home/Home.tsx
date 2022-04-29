@@ -30,6 +30,7 @@ export default function Home() {
   const MyRow = styled(Row)`
     display: flex;
     justify-content: space-between;
+    gap: 3rem;
   `;
 
   return (

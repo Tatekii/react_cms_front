@@ -4,9 +4,10 @@ import reqLocation from "@/api/reqLocation";
 import { message } from "antd";
 import useMount from "@/hooks/useMount";
 import styled from "@emotion/styled";
+import { memo } from "react";
 
 /** 获取天气hooks */
-export default function Weather() {
+export default memo(function Weather() {
   const [weather, setWeather] = useState<{
     temperature?: string;
     weather?: string;
@@ -57,4 +58,4 @@ export default function Weather() {
       )}
     </>
   );
-}
+});

@@ -1,22 +1,22 @@
-import useTitle from "./useTitle";
-import Clock from "./Clock";
-import Weather from "./Weather";
-import FullScreen from "./Fullscreen";
+import Clock from "@/components/Clock";
+import Weather from "@/components/Weather";
+import FullScreen from "@/components/Fullscreen";
 import Logout from "./Logout";
 import { useAuth } from "@/auth/auth-context";
 import styled from "@emotion/styled";
-import { Card } from "antd";
+import PageTitle from "./PageTitle";
 
 export default function PageHeader() {
-  const title = useTitle();
   const { user } = useAuth();
 
-  const MyHeader = styled(Card)`
+  const MyHeader = styled.div`
     height: 80px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     padding: 5px;
+    padding: 0 24px;
+    background: #fff;
   `;
   const HeaderTop = styled.div`
     height: 30px;
@@ -32,49 +32,37 @@ export default function PageHeader() {
     display: flex;
     justify-content: space-between;
   `;
-  const Title = styled.div`
-    font-size: 2rem;
 
-    &::after {
-      content: "";
-      position: absolute;
-      border: 20px solid transparent;
-      border-top: 20px solid var(--tsc);
-      animation: 1s linear bounce infinite;
-      z-index: 6;
-    }
-
-    @keyframes bounce {
-      0% {
-        transform: 0;
-      }
-      50% {
-        transform: translateY(10px);
-      }
-      100% {
-        transform: 0;
-      }
-    }
-  `;
   const WeatherCity = styled.div`
     font-size: 20px;
     display: flex;
-    align-item: center;
+    align-items: center;
     justify-content: end;
+    background: var(--tsc);
+    color: azure;
+    border-radius: 1rem;
+    padding: 0 3rem;
+  `;
+
+  const UserControl = styled.div`
+    display: flex;
+    gap: 2rem;
   `;
   return (
     <MyHeader>
       <HeaderTop>
-        <div style={{ fontSize: "2rem" }}>欢迎，{user?.username}</div>
-        <Logout />
-        <FullScreen />
-      </HeaderTop>
-      <HeaderBottom>
-        <Title>{title}</Title>
         <WeatherCity>
           <Clock />
           <Weather />
         </WeatherCity>
+      </HeaderTop>
+      <HeaderBottom>
+        <PageTitle />
+        <UserControl>
+          <div>欢迎，{user?.username}</div>
+          <Logout />
+          <FullScreen />
+        </UserControl>
       </HeaderBottom>
     </MyHeader>
   );

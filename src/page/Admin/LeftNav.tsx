@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { NavLink, useLocation } from "react-router-dom";
-import { Menu } from "antd";
+import { Menu, Layout } from "antd";
 import * as Icons from "@ant-design/icons";
 import logo from "@/assets/img/logo.png";
 import menuList from "@/config/menu";
@@ -8,6 +8,7 @@ import { MenuItem } from "@/config/types";
 import styled from "@emotion/styled";
 
 const { SubMenu, Item } = Menu;
+const { Sider } = Layout;
 
 /** 左侧导航组件 */
 export default function LeftNav() {

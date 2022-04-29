@@ -1,4 +1,4 @@
-import Admin from "./page/Admin/Admin";
+import Admin from "@/page/Admin";
 import { Provider } from "react-redux";
 import store from "./redux";
 import { BrowserRouter } from "react-router-dom";
