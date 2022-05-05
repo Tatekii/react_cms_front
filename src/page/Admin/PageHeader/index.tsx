@@ -13,22 +13,21 @@ export default function PageHeader() {
     height: 80px;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: space-evenly;
     padding: 5px;
     padding: 0 24px;
     background: #fff;
   `;
   const HeaderTop = styled.div`
-    height: 30px;
-    line-height: 30px;
+    /* height: 30px; */
+    /* line-height: 30px; */
     display: flex;
     justify-content: end;
     gap: 1em;
     align-items: center;
   `;
   const HeaderBottom = styled.div`
-    height: 30px;
-    line-height: 30px;
+    line-height: 3.2rem;
     display: flex;
     justify-content: space-between;
   `;
@@ -38,10 +37,10 @@ export default function PageHeader() {
     display: flex;
     align-items: center;
     justify-content: end;
-    background: var(--tsc);
-    color: azure;
+    color: var(--tsc);
+    /* color: azure; */
     border-radius: 1rem;
-    padding: 0 3rem;
+    /* padding: 0 3rem; */
   `;
 
   const UserControl = styled.div`

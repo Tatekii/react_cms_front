@@ -1,6 +1,6 @@
 import http from "./http";
 import { A_MAP_KEY } from "@/config";
-import { CategoryItem } from "@/types";
+import { CategoryItem, RoleItem } from "@/types";
 import { AxiosPromise } from "axios";
 
 // 删除图片
@@ -134,7 +134,10 @@ export const reqAddRole = (roleName: string) =>
   http.post(`/api/role/add`, { roleName });
 
 //角色分页列表
-export const reqRolePaginationList = (pageNum: number, pageSize: number) =>
+export const reqRolePaginationList: (
+  pageNum: number,
+  pageSize: number
+) => AxiosPromise<RoleItem[] | []> = (pageNum, pageSize) =>
   http.get(`/api/role/list`, {
     params: {
       pageNum,
@@ -145,7 +148,7 @@ export const reqRolePaginationList = (pageNum: number, pageSize: number) =>
 //分配权限
 export const reqAllocatePermission = (
   id: string,
-  menus: string,
+  menus: string[],
   authName: string
 ) =>
   http.post(`/api/role/update`, {

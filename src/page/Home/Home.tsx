@@ -101,7 +101,7 @@ export default function Home() {
       >
         <MyRow>
           <Card
-            style={{ width: "60%" }}
+            style={{ width: "70%" }}
             title={isVisited ? "访问趋势" : "销售趋势"}
             bodyStyle={{ padding: 0, height: 275 }}
             extra={<ReloadOutlined style={{ color: "red" }} />}
@@ -109,11 +109,7 @@ export default function Home() {
             <Bar />
           </Card>
 
-          <Card
-            title="任务"
-            extra={<ReloadOutlined />}
-            className="home-table-right"
-          >
+          <Card title="任务" extra={<ReloadOutlined />}>
             <Timeline>
               <Timeline.Item color="green">新版本迭代会</Timeline.Item>
               <Timeline.Item color="green">完成网站设计初版</Timeline.Item>

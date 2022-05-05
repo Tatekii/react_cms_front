@@ -13,3 +13,16 @@ export interface CategoryItem {
   name: string;
   __v: number;
 }
+
+/** 角色权限 */
+export interface RoleItem {
+  name: {
+    type: string;
+    required: boolean;
+  };
+  auth_name: string;
+  auth_time: number;
+  create_time: number;
+  menus: string[];
+  _id: string;
+}

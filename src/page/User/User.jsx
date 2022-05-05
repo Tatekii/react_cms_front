@@ -125,7 +125,7 @@ export default function User() {
 			render: (item) => {
 				return (
 					<>
-						<Button type="link">修改</Button>
+						<Button type="link">修改(undo)</Button>
 						<Button type="link" onClick={deleteUser(item)}>
 							删除
 						</Button>
