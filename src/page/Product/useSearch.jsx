@@ -3,7 +3,7 @@ import { Button, Select, Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 const { Option } = Select;
 
-export default function useSearch(setSearchProps) {
+export default function Search(setSearchProps) {
 	const fn = setSearchProps;
 	// 接受修改请求参数的setFn
 	const inputRef = useRef(null);

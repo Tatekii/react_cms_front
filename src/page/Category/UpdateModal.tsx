@@ -4,7 +4,6 @@ import { reqAddCategory, reqUpdateCategory } from "@/api";
 const { Item } = Form;
 
 interface UpdateModalProps extends ModalProps {
-  visible: boolean;
   editType: number;
   setLoading: Dispatch<SetStateAction<boolean>>;
   updateModalCurrent: {
@@ -37,6 +36,8 @@ const UpdateModal = ({
     try {
       //表单的统一验证
       const { categoryName } = await formRef.validateFields();
+      console.log(categoryName);
+
       setLoading(false);
       if (editType === 0) {
         //新增分类的逻辑
@@ -44,7 +45,7 @@ const UpdateModal = ({
       } else {
         //修改分类
         //修改分类的逻辑
-        handleUpdateCategory();
+        handleUpdateCategory(categoryName);
       }
     } catch (e) {
       message.error("表单输入有误，请检查", 2);
@@ -52,17 +53,10 @@ const UpdateModal = ({
   };
 
   /**
-   * 点击取消
-   */
-  const handleCancelModal = () => {
-    setModalVisible(false);
-  };
-
-  /**
    * 修改分类
    */
-  const handleUpdateCategory = async () => {
-    const { categoryId, categoryName } = updateModalCurrent;
+  const handleUpdateCategory = async (categoryName: string) => {
+    const { categoryId } = updateModalCurrent;
     const { status } = await reqUpdateCategory(categoryId, categoryName);
     if (status === 0) {
       message.success("更新商品分类成功", 1);
@@ -94,7 +88,9 @@ const UpdateModal = ({
       title={`${editType === 0 ? "新增" : "修改"}分类`}
       visible={visible}
       onOk={handleOkModal}
-      onCancel={handleCancelModal}
+      onCancel={() => {
+        setModalVisible(false);
+      }}
       okText="确认"
       cancelText="取消"
     >

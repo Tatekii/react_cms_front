@@ -9,7 +9,7 @@ import { reqUpdateProductStatus } from "@/api/product";
  * @param {*} item 传入的行数据
  * @return {*} 
  */
-export default function useChangeStatus(item) {
+export default function ProductStatus({item}) {
 	const { _id } = item;
 	const [status, setStatus] = useState(item.status);
 

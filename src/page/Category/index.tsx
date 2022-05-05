@@ -1,16 +1,16 @@
-import { Card, Button, Table, message } from "antd";
+import { Card, Button, message } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { reqCategoryList } from "@/api";
-import { PAGE_SIZE } from "@/config";
 import { saveCategory } from "@/redux/slices/category.slice";
 import { useState } from "react";
 import useMount from "@/hooks/useMount";
-import { useAppSelector, useAppDispatch } from "@/hooks/useRedux";
+import { useAppDispatch } from "@/hooks/useRedux";
 import UpdateModal from "./UpdateModal";
+import CategoryTable from "./CategoryTable";
+import { CategoryItem } from "@/types";
 
 export default function Category() {
   const dispatch = useAppDispatch();
-  const categoryList = useAppSelector((state) => state.category);
 
   const [isLoading, setLoading] = useState<boolean>(true);
   const [editType, setEditType] = useState(0);
@@ -52,7 +52,7 @@ export default function Category() {
   /**
    * 显示更新分类的弹窗
    */
-  const handleShowUpdateModal = (item: { _id: string; name: string }) => {
+  const handleShowUpdateModal = (item: CategoryItem) => {
     // 回显的数据
     const { _id: categoryId, name: categoryName } = item;
     // 显示模态框，并将回显数据放到状态中
@@ -64,7 +64,7 @@ export default function Category() {
   };
 
   return (
-    <div>
+    <>
       <Card
         extra={
           <Button
@@ -76,37 +76,13 @@ export default function Category() {
           </Button>
         }
       >
-        <Table
-          bordered={true}
-          dataSource={categoryList}
+        {/* 商品分类表格 */}
+        <CategoryTable
           loading={isLoading}
-          rowKey="_id"
-          pagination={{ defaultPageSize: PAGE_SIZE, showQuickJumper: true }}
-          columns={[
-            {
-              title: "分类名称",
-              dataIndex: "name",
-              key: "name",
-            },
-            {
-              title: "操作",
-              key: "operator",
-              render: (item: any) => (
-                <Button
-                  type="link"
-                  onClick={() => {
-                    handleShowUpdateModal(item);
-                  }}
-                >
-                  修改分类
-                </Button>
-              ),
-              width: "25%",
-              align: "center",
-            },
-          ]}
+          handleShowUpdateModal={handleShowUpdateModal}
         />
       </Card>
+      {/* 添加修改modal */}
       <UpdateModal
         visible={isModalVisible}
         setLoading={setLoading}
@@ -115,6 +91,6 @@ export default function Category() {
         getCategoryList={getCategoryList}
         setModalVisible={setModalVisible}
       />
-    </div>
+    </>
   );
 }

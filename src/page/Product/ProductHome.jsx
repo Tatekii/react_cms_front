@@ -1,16 +1,14 @@
-import { React } from "react";
 import { Card, Button, Table, Space } from "antd";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 import useGetProductList from "./useGetProductList";
 import useSearch from "./useSearch";
-import useChangeStatus from "./useChangeStatus";
+import ProductStatus from "./ProductStatus";
 import { PAGE_SIZE } from "@/config";
 
 export default function Product() {
 	// 请求的数据,本地修改数据方法,修改请求的参数
 	const { dataSource, setDataSource, setPageProps, setSearchProps } = useGetProductList();
-	const statusUI = useChangeStatus;
 
 	// 由于后端分页,这里再发请求
 	const handleTableChange = (pagination) => {
@@ -42,7 +40,7 @@ export default function Product() {
 		{
 			title: "状态",
 			render: (item) => {
-				return statusUI(item);
+				return <ProductStatus item={item}/>;
 			},
 			key: "status",
 			width: "5%",
