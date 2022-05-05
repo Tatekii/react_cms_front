@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import menuList from "@/config/menu";
 import styled from "@emotion/styled";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 export default function useTitle() {
   const [title, setTitle] = useState("");
@@ -58,6 +59,8 @@ export default function useTitle() {
     };
     getTitle();
   }, [pathname]);
+
+  useDocumentTitle(title);
 
   return <Title>{title}</Title>;
 }

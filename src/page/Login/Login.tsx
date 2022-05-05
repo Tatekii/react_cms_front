@@ -3,10 +3,12 @@ import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import Corner from "@/components/GithubCorner/index";
 import { useAuth } from "@/auth/auth-context";
 import styled from "@emotion/styled";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 const { Item } = Form;
 
 /** 登录页 */
 const Login = () => {
+  useDocumentTitle("欢迎，请登录以继续");
   const { login } = useAuth();
   /** 提交登陆 */
   const handleFinish = async (values: {

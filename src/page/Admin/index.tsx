@@ -3,6 +3,7 @@ import PageHeader from "./PageHeader";
 import { Layout } from "antd";
 import styled from "@emotion/styled";
 import RouterContent from "./RouterContent";
+import useDocumentTitle from "@/hooks/useDocumentTitle";
 
 const { Sider } = Layout;
 
@@ -23,6 +24,7 @@ const MainLayout = styled(Layout)`
 
 /** 后台根组件 */
 function Admin() {
+  useDocumentTitle("CMS管理系统");
   return (
     <Layout>
       <Sider>
