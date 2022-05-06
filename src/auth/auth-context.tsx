@@ -44,6 +44,7 @@ export const useAuth = () => {
 const bootStrap = async () => {
   let user = null;
   const token = auth.getToken();
+
   if (token) {
     // TODO
     // 用token去拿用户 没过期自动登录

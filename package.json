@@ -94,6 +94,9 @@
 	"jest": {
 		"moduleNameMapper": {
 			"^@/(.*)": "<rootDir>/src/$1"
-		}
+		},
+		"transformIgnorePatterns": [
+			"/node_modules/(?!antd|@ant-design|rc-.+?|@babel/runtime).+(js|jsx)$"
+		]
 	}
 }

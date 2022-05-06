@@ -6,6 +6,12 @@
 
 个人 react 生态练手用
 
+### 运行
+
+- yarn start
+- yarn build
+- yarn test
+
 ### Includes
 
 - React Hooks
@@ -13,5 +19,6 @@
 - React-Router
 - Css In Js
 - Jwt
+- Jest
 
 ### 👉[配套后端](https://github.com/Tatekii/react_cms_backend)

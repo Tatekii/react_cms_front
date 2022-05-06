@@ -47,7 +47,7 @@ const Login = () => {
   `;
 
   return (
-    <LoginWrapper>
+    <LoginWrapper data-testid="loginPage">
       <Corner />
       <LoginForm>
         <LoginTitle>用户登录</LoginTitle>

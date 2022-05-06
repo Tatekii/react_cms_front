@@ -5,7 +5,7 @@ import store from "store";
 import http from "../api/http";
 import { AuthForm } from "./types";
 
-const localStorageKey = "__auth_provider_token__";
+export const localStorageKey = "__auth_provider_token__";
 
 export const getToken = () => store.get(localStorageKey);
 

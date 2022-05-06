@@ -1,5 +1,9 @@
 import Login from "@/page/Login/Login";
 const UnAuthenticateApp = () => {
-  return <Login />;
+  return (
+    <div data-testid="unAuthenticateApp">
+      <Login />
+    </div>
+  );
 };
 export default UnAuthenticateApp;

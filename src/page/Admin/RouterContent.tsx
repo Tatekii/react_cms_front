@@ -1,14 +1,16 @@
-import Category from "@/page/Category";
-import Product from "@/page/Product/Product";
-import User from "@/page/User/User";
-import Role from "@/page/Role";
-import ChartsBar from "@/page/Charts/Bar";
-import ChartsLine from "@/page/Charts/Line";
-import ChartsPie from "@/page/Charts/Pie";
-import NotFound from "@/page/NotFound/NotFound";
+import React from "react";
 import Home from "@/page/Home/Home";
 import { Route, Routes } from "react-router-dom";
 import styled from "@emotion/styled";
+
+const Category = React.lazy(() => import("@/page/Category"));
+const Product = React.lazy(() => import("@/page/Product/Product"));
+const User = React.lazy(() => import("@/page/User/User"));
+const Role = React.lazy(() => import("@/page/Role"));
+const ChartsBar = React.lazy(() => import("@/page/Charts/Bar"));
+const ChartsLine = React.lazy(() => import("@/page/Charts/Line"));
+const ChartsPie = React.lazy(() => import("@/page/Charts/Pie"));
+const NotFound = React.lazy(() => import("@/page/NotFound/NotFound"));
 
 const RouteArea = styled.div`
   overflow: auto;

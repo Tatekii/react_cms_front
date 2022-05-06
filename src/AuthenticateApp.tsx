@@ -4,12 +4,13 @@ import store from "./redux";
 import { BrowserRouter } from "react-router-dom";
 const AuthenticateApp = () => {
   return (
-    <Provider store={store}>
-      {/* 有登录态了给路由 */}
-      <BrowserRouter>
-        <Admin />
-      </BrowserRouter>
-    </Provider>
+    <div data-testid="authenticateApp">123</div>
+    // 	<Provider store={store}>
+    // 	{/* 有登录态了给路由 */}
+    // 	<BrowserRouter>
+    // 		<Admin />
+    // 	</BrowserRouter>
+    // </Provider>
   );
 };
 export default AuthenticateApp;
