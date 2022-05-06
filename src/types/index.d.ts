@@ -26,3 +26,9 @@ export interface RoleItem {
   menus: string[];
   _id: string;
 }
+
+// 登录form
+export interface AuthForm {
+  username: string;
+  password: string;
+}

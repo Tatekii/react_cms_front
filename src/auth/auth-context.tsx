@@ -1,18 +1,17 @@
 import React, { useState, ReactNode, useContext } from "react";
 import * as auth from "./auth-handler";
-import { AuthForm } from "./types";
-import { User } from "@/types";
+import { User, AuthForm } from "@/types";
 import useMount from "@/hooks/useMount";
 
 /** auth context 主体 */
-const AuthContext = React.createContext<
+export const AuthContext = React.createContext<
   | {
       user: User | null;
       login: (form: AuthForm) => Promise<void>;
       logout: () => Promise<void>;
     }
-  | undefined
->(undefined);
+  | {}
+>({});
 AuthContext.displayName = "AuthContext";
 
 /** auth provider */
@@ -23,6 +22,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => auth.logout().then(() => setUser(null));
 
   useMount(() => {
+    console.log("⭐️AuthProvider useMount");
+
     bootStrap().then(setUser);
   });
 

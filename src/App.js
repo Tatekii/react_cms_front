@@ -9,12 +9,10 @@ const UnAuthenticateApp = lazy(() => import("./UnAuthenticateApp"));
 function App() {
   const { user } = useAuth();
 
-  console.log("@@@ ", user);
-
   return (
     <ErrorBoundary fallbackRender={FullPageErrorFallback}>
       <Suspense fallback={<FullPageLoading />}>
-        {user ? <AuthenticatedApp /> : <UnAuthenticateApp />}
+        {user !== null ? <AuthenticatedApp /> : <UnAuthenticateApp />}
       </Suspense>
     </ErrorBoundary>
   );

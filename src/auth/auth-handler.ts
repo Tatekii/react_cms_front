@@ -3,7 +3,7 @@ import { message } from "antd";
 import { AxiosResponse } from "axios";
 import store from "store";
 import http from "../api/http";
-import { AuthForm } from "./types";
+import { AuthForm } from "@/types";
 
 export const localStorageKey = "__auth_provider_token__";
 
