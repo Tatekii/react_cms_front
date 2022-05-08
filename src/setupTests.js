@@ -26,3 +26,25 @@ window.matchMedia = (query) => ({
   removeEventListener: jest.fn(),
   dispatchEvent: jest.fn(),
 });
+
+// MockWorker
+class MockWorker {
+  constructor(stringUrl) {
+    this.url = stringUrl;
+    this.onmessage = () => {};
+  }
+
+  postMessage(msg) {
+    this.onmessage(msg);
+  }
+}
+global.Worker = MockWorker;
+global.URL.createObjectURL = jest.fn();
+
+// Mock Navigator
+const mockGeolocation = {
+  getCurrentPosition: jest.fn(),
+  watchPosition: jest.fn(),
+};
+
+global.navigator.geolocation = mockGeolocation;

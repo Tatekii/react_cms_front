@@ -8,6 +8,7 @@ const UnAuthenticateApp = lazy(() => import("./UnAuthenticateApp"));
 
 function App() {
   const { user } = useAuth();
+  console.log("@@@@USER", user);
 
   return (
     <ErrorBoundary fallbackRender={FullPageErrorFallback}>

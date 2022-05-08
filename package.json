@@ -42,13 +42,13 @@
 		"redux-logger": "^3.0.6",
 		"screenfull": "^5.1.0",
 		"store": "^2.0.12",
-		"typescript": "^4.1.2",
+		"typescript": "^4.6.4",
 		"web-vitals": "^1.0.1"
 	},
 	"scripts": {
 		"start": "react-app-rewired start",
 		"build": "react-app-rewired build",
-		"test": "react-app-rewired test  --watchAll=false",
+		"test": "react-app-rewired test ",
 		"eject": "react-scripts eject",
 		"prepare": "husky install",
 		"cz": "cz"
@@ -75,13 +75,17 @@
 	"devDependencies": {
 		"@commitlint/cli": "^16.2.3",
 		"@commitlint/config-conventional": "^16.2.1",
+		"@testing-library/react-hooks": "^8.0.0",
+		"@types/jest": "^27.5.0",
+		"@types/react-test-renderer": "^18.0.0",
 		"commitizen": "^4.2.4",
 		"cz-conventional": "0.0.2",
 		"cz-conventional-changelog": "3.3.0",
 		"eslint-config-prettier": "^8.5.0",
 		"husky": ">=6",
 		"lint-staged": ">=10",
-		"prettier": "^2.6.2"
+		"prettier": "^2.6.2",
+		"react-test-renderer": "17"
 	},
 	"lint-staged": {
 		"*.{ts,tsx,js,css,md}": "prettier --write"

@@ -2,16 +2,17 @@ import React, { useState, ReactNode, useContext } from "react";
 import * as auth from "./auth-handler";
 import { User, AuthForm } from "@/types";
 import useMount from "@/hooks/useMount";
+import { act } from "@testing-library/react";
 
 /** auth context 主体 */
 export const AuthContext = React.createContext<
   | {
       user: User | null;
-      login: (form: AuthForm) => Promise<void>;
-      logout: () => Promise<void>;
+      login?: (form: AuthForm) => Promise<void>;
+      logout?: () => Promise<void>;
     }
-  | {}
->({});
+  | undefined
+>(undefined);
 AuthContext.displayName = "AuthContext";
 
 /** auth provider */
@@ -22,8 +23,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const logout = () => auth.logout().then(() => setUser(null));
 
   useMount(() => {
-    console.log("⭐️AuthProvider useMount");
-
     bootStrap().then(setUser);
   });
 
@@ -42,7 +41,7 @@ export const useAuth = () => {
 };
 
 /** 初始化 user + 自动登录 */
-const bootStrap = async () => {
+export const bootStrap = async () => {
   let user = null;
   const token = auth.getToken();
 
