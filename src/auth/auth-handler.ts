@@ -9,7 +9,7 @@ export const localStorageKey = "__auth_provider_token__";
 
 export const getToken = () => store.get(localStorageKey);
 
-const handleUserResponse = ({ data }: AxiosResponse) => {
+export const handleUserResponse = ({ data }: AxiosResponse) => {
   store.set(localStorageKey, data.token || "");
   return data.user;
 };

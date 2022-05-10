@@ -2,7 +2,6 @@ import React, { useState, ReactNode, useContext } from "react";
 import * as auth from "./auth-handler";
 import { User, AuthForm } from "@/types";
 import useMount from "@/hooks/useMount";
-import { act } from "@testing-library/react";
 
 /** auth context 主体 */
 export const AuthContext = React.createContext<
